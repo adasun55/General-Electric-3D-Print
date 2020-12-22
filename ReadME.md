@@ -12,27 +12,5 @@ We have been working closely with **GE Additive**, the pioneering leader in addi
 ## Overall Approach
 Our team has been working with data that was generated through experiments from a GE Additive metal 3D printing machine. The dataset with characterization results and camera data was created by the printing laser and recorded by the photodiode sensor camera through an experiment that consisted of single line prints. There are two metal powder layers with different melt pools in single lines with blocks and strips division. The objective from GE is to build the best predictive model for melt pool dimension (width, depth, height, total height) forecasting. Our work will help to reduce parameter iteration time for new pieces from months to weeks, improving metal 3D printing processes accurately and effectively. Promising results will be tested further at GE Additive to validate experimental results.
 
-## Dataset
-1. Sensor data
-There are data from 2 layers (161 and 181) with layer number at the end of the filename. Each layer has 2 files, one with .avi (camera data) and the other with .avi.tdms (tdms file which includes layer, x, y, APD, and LaserTTL). Each set of files has exact same length of records so that each image can be matched with the tdms file.
-
-2. BoP02 Analysis KP_SCedit0306.csv
-This data includes characterization results with corresponding block/strike IDs and their measurements (width, depth, height, total height). 
-
-3. How to connect sensor data to characterization
-  * Data to be filtered out from sensor data
-    * Non BoP data in each layer (16 block builds are included in each layer)
-    * LaserTTL = 0
-
-  * Assign Block ID: 
-    * Please refer to block design.jpg. (Note that x, y is flipped in the sensor data). 141 includes block 15-22, and 161 includes 7-14. Characterization is        performed on 8 blocks.
-
-  * Assign Strike ID in each block: assign strike ID 1 through 34 in each block
-
-## Problem and Solution 
-The first step taken was to take data from machine sensors, and a video feed of the laser focus point of the printing process. This helped to generate a single CSV file and frame images (we are taking frames at 30 fps and about 80,000 in total). After Exploratory Data Analysis (EDA) and Data Preprocessing, we built and trained various machine learning models on the data and evaluated the final performances. We chose the Random Forest model, which has the best accuracy among all. The 3rd step that the team implemented was to calculate more features from the images (using Sobel gradients), and exploring new approaches with autoencoders, a type of Neural Network. Our next steps would be to get more data from General Electric and to train the model on that data to improve its overall performance,then running the model on a few live prints and having General Electric validate the performance.
-
-
-
 
 *Team: Ada Sun, Enrique Marin, Armyben Patel, Ziren Lin, Hassan Khawaja*
